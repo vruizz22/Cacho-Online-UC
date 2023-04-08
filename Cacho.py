@@ -754,7 +754,4 @@ def jugar_cacho(num_jugadores):
             # Si la apuesta es rechazada, el siguiente jugador hace una nueva apuesta
 
             apuesta_nueva = hacer_apuesta(apuesta_actual, jerarquia_pintas)
-def JuegoCacho():
-    players = ["Jugador 1", "Jugador 2"]
-    game = CachoGame(players)
-    game.play()
+
