@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <link rel="icon" type="image/png" href="img/Icon.jpg">
+  <link rel="stylesheet" href="cacho.css" type="text/css">
+
+	<meta charset="UTF-8">
+
+	<title>Cacho Online</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+
+	<style>
+
+		#dice-container {
+
+			display: flex;
+
+			justify-content: center;
+
+			align-items: center;
+
+			margin-top: 50px;
+
+		}
+
+		.dice {
+
+			width: 100px;
+
+			height: 100px;
+
+			background-color: white;
+
+			border: 1px solid black;
+
+			border-radius: 5px;
+
+			display: flex;
+
+			justify-content: center;
+
+			align-items: center;
+
+			font-size: 30px;
+
+			margin-right: 20px;
+
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+	<h1>Bienvenidos a Cacho Online</h1>
+
+	<p class="bajada">El juego de cacho es un juego de dados tradicional que se juega con 5 dados de seis caras. El objetivo del juego es adivinar y/o apostar la cantidad y la pinta de los dados que hay en la mesa.</p>
+
+	
+
+	<h2>Reglas del juego</h2>
+	<ul>
+
+		<li>El juego se juega con cinco dados de seis caras.</li>
+
+		<li>El primer jugador tira los cinco dados y oculta el resultado con su mano.</li>
+
+		<li>A continuación, el jugador anuncia una pinta y una cantidad, por ejemplo "tres seises".</li>
+
+		<li>El siguiente jugador puede aceptar la apuesta o hacer una nueva apuesta de una cantidad y una pinta diferente, pero la cantidad debe ser mayor o igual a la apuesta anterior.</li>
+
+		<li>Si un jugador no cree en la apuesta del jugador anterior, puede decir "dudo". Entonces, se revelan los dados y se verifica si la apuesta es correcta o no.</li>
+
+		<li>Si la apuesta es correcta, el jugador que dudó pierde un dado. Si la apuesta es incorrecta, el jugador que hizo la apuesta pierde un dado.</li>
+
+		<li>El juego continúa con los jugadores restantes, repitiendo los pasos 3 a 6.</li>
+
+		<li>El jugador que pierde todos los dados pierde el juego.</li>
+
+		<li>Si un jugador logra adivinar correctamente la cantidad y la pinta de los dados totales en la mesa diciendo "calzo", gana automáticamente un dado en el juego.</li>
+
+		<li>Las pintas tienen un valor jerárquico. La jerarquía de las pintas, de mayor a menor valor, es la siguiente: Ases, Reyes, Caballos, Sotas, Seises.</li>
+
+		<li>Si un jugador hace una apuesta con una pinta más alta que la pinta más alta en la mesa, esa apuesta es automáticamente correcta.</li>
+
+		<li>Si un jugador hace una apuesta con una cantidad mayor que la cantidad total de dados en la mesa, esa apuesta es automáticamente incorrecta.</li>
+
+	</ul>
+
+
+
+	<h2>Comenzar el juego</h2>
+
+	<p>Para comenzar el juego, hagan una ronda de lanzamientos de dados para determinar quién será el primer jugador. El jugador con el lanzamiento más alto será el primer jugador.</p>
+
+	<p>Una vez que se haya determinado el primer jugador, él o ella puede comenzar la ronda de apuestas.</p>
+
+	<p>¡Que comience el juego!</p>
+
+<div id="dice-container">
+
+		<div class="dice" id="dice1"></div>
+
+		<div class="dice" id="dice2"></div>
+
+		<div class="dice" id="dice3"></div>
+
+		<div class="dice" id="dice4"></div>
+
+		<div class="dice" id="dice5"></div>
+
+	</div>
+
+	<script>
+
+		// Función para generar un número aleatorio entre 1 y 6 (correspondiente a la pinta de un dado)
+
+		function rollDice() {
+
+			return Math.floor(Math.random() * 6) + 1;
+
+		}
+
+
+
+		// Función para animar un dado y cambiar su valor
+
+		function animateDice(dice) {
+
+			// Generamos un número aleatorio para simular el valor del dado
+
+			let value = rollDice();
+
+			// Creamos una animación con GSAP que dure 1 segundo y cambie la rotación del dado
+
+			gsap.to(dice, {duration: 1, rotationX: "360deg", rotationY: "360deg", onComplete: function() {
+
+				// Cambiamos el valor del dado después de la animación
+
+				dice.innerHTML = value;
+
+			}});
+
+		}
+
+
+
+		// Función para animar todos los dados
+
+		function animateAllDice() {
+
+			// Obtenemos todos los dados y los animamos uno por uno
+
+			let dice = document.querySelectorAll(".dice");
+
+			for (let i = 0; i < dice.length; i++) {
+
+				animateDice(dice[i]);
+
+			}
+
+		}
+
+
+
+		// Animamos todos los dados al cargar la página
+
+		animateAllDice();
+
+
+
+		// Animamos todos los dados cuando se hace click en el botón "Lanzar dados"
+
+		$("#roll-button").click(function() {
+
+			animateAllDice();
+
+		});
+
+	</script>
+
+</body>
+
+</html>

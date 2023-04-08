@@ -1,0 +1,94 @@
+CSS---->
+
+/* Estilos para el contenedor principal */
+
+*{
+    box-sizing: border-box;
+}
+
+.container {
+  background-color: #F5F5F5;
+  width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+/* Estilos para el encabezado */
+
+header {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+
+
+/* Estilos para los enlaces */
+a {
+  color: #333;
+  text-decoration: none;
+}
+a:hover {
+  color: #777;
+}
+
+
+
+/* Estilos para las imágenes */
+
+img {
+
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+
+
+/* Estilos para el texto */
+h1{
+    font-size: 70px;
+    position: relative;
+    margin-top: 100px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    text-shadow: 20px 20px 20px rgba(0, 0, 0, 0.5);
+}
+h2{
+    font-size: 45px;
+    position: relative;
+    margin-left: 450px;
+    color: rgb(233, 12, 12);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    text-shadow: 15px 15px 15px rgba(0, 0, 0, 0.5);
+}
+.bajada{
+    font-size: 30px;
+    position: relative;
+    margin-left: 100px;
+    color: rgb(5, 223, 223);
+    font-family: 'Roboto', sans-serif;
+    text-shadow: 15px 15px 15px rgba(0, 0, 0, 0.5);
+    font-weight: 600;
+}
+ul{
+  font-size: 20px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+
+}
+body {
+background-image: url(img/wallpaper.jpg);
+background-position: relative;
+background-repeat: no-repeat;
+background-size: cover;
+}
