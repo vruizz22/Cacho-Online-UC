@@ -1,5 +1,5 @@
 from .client_types import SendFn
-from .models import InvalidPayloadResponse, Payload
+from .models import InvalidPayloadResponse, Payload, PingResponse
 
 
 class Player:
@@ -32,15 +32,13 @@ class Game:
     async def on_player_action(self, event_player: Player, action: Payload):
         "Función que es llamada cuando un jugador envía una acción"
         if action.type == "ping":
-            payload = {"type": "ping", "data": f"pong from {event_player.user_name}"}
+            response = PingResponse(data=f"pong to {event_player.user_name}")
             for player in self.players:
-                await player.send(payload)
+                await player.send(response)
         else:
             ok = await self.current_context_handler(event_player, action)
-            if ok:
-                return
-            for player in self.players:
-                await player.send(InvalidPayloadResponse())
+            if not ok:
+                await event_player.send(InvalidPayloadResponse())
 
     # Eventos manejados dentro del contexto actual
 
