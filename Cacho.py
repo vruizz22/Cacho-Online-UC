@@ -1,6 +1,56 @@
 import random
-from flask import Flask, render_template, request, redirect, url_for, flash
-from random import randint
+from flask import Flask, jsonify, render_template, request
+from flask_socketio import SocketIO, emit
+from Cacho import CachoGame
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
+
+# Ruta principal para mostrar la página del juego
+@app.route("/")
+def index():
+    return render_template("cacho.html")
+
+# Función que se ejecuta cuando se conecta un nuevo cliente al servidor de websockets
+@socketio.on('connect')
+def handle_connect():
+    print('Cliente conectado')
+
+# Función que se ejecuta cuando se desconecta un cliente del servidor de websockets
+@socketio.on('disconnect')
+def handle_disconnect():
+    print('Cliente desconectado')
+
+# Ruta para procesar la solicitud de lanzamiento de dados y devolver los resultados
+@app.route("/lanzar_dados", methods=["POST"])
+def lanzar_dados():
+    dados = []
+    for i in range(5):
+        dados.append(random.randint(1,6))
+    # Envía los resultados a todos los clientes conectados a través del canal "resultados"
+    socketio.emit('resultados', dados)
+    return jsonify(dados)
+
+# Ruta para procesar las apuestas y verificar si son correctas o no
+@app.route("/verificar_apuesta", methods=["POST"])
+def verificar_apuesta():
+    datos = request.get_json()
+    pinta = datos["pinta"]
+    cantidad = datos["cantidad"]
+    dados = datos["dados"]
+    dados_filtrados = [dado for dado in dados if dado == pinta or dado == 1]
+    if len(dados_filtrados) >= cantidad:
+        resultado = {"resultado": "correcto"}
+    else:
+        resultado = {"resultado": "incorrecto"}
+    # Envía el resultado de la apuesta al cliente que la realizó a través del canal "resultado_apuesta"
+    socketio.emit('resultado_apuesta', resultado)
+    return jsonify(resultado)
+
+if __name__ == "__main__":
+    socketio.run(app)
+
 
 
 
