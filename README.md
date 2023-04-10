@@ -30,7 +30,7 @@ Las reglas básicas del juego de cacho son las siguientes:
 •Si un jugador hace una apuesta con una cantidad mayor que la cantidad total de dados en la mesa, esa apuesta es automáticamente incorrecta.
 
 
-#¿Que debo Instalar?
+# ¿Que debo Instalar?
 
 •pip install flask-socketio
 
